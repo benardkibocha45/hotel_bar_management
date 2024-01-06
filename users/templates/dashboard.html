@@ -2,6 +2,7 @@
 
 {% extends 'base.html' %}
 {% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts"/>
     <h1>User Dashboard</h1>
 
     <!-- Graph showing 12 months revenue -->
@@ -115,4 +116,52 @@
         <li>Room 2</li>
         <!-- Add more rooms as needed -->
     </ul>
+    <div id="totalInventoryChart"></div>
+<div id="inventoryByCategoryChart"></div>
+<div id="inventoryTurnoverChart"></div>
+<script>
+<!-- Add more containers for other charts as needed -->
+document.addEventListener("DOMContentLoaded", function () {
+    // Total Inventory Value Chart
+    var totalInventoryChart = new ApexCharts(document.querySelector("#totalInventoryChart"), {
+        chart: {
+            type: "bar",
+            height: 350,
+        },
+        series: [{
+            name: "Total Inventory Value",
+            data: ["{{ total_inventory_value }}"], // Check if this value is correctly passed from the server
+        }],
+        xaxis: {
+            categories: ["Total Inventory Value"],
+        },
+    });
+    totalInventoryChart.render();
+
+    // Inventory Value by Category Chart
+    var inventoryByCategoryChart = new ApexCharts(document.querySelector("#inventoryByCategoryChart"), {
+        chart: {
+            type: "pie",
+            height: 350,
+        },
+        series: ["{{ inventory_value_by_category | safe }}"], // Check if this data is correctly passed from the server
+        labels: ["{{ inventory_value_by_category | safe }}"], // Check if this data is correctly passed from the server
+    });
+    inventoryByCategoryChart.render();
+
+    // Inventory Turnover Ratio Chart
+    var inventoryTurnoverChart = new ApexCharts(document.querySelector("#inventoryTurnoverChart"), {
+        chart: {
+            type: "radialBar",
+            height: 350,
+        },
+        series: ["{{ inventory_turnover_ratio }}"], // Check if this value is correctly passed from the server
+        labels: ["Inventory Turnover Ratio"],
+    });
+    inventoryTurnoverChart.render();
+
+    // Add more chart initializations for other metrics if needed
+});
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 {% endblock %}

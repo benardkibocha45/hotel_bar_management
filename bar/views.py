@@ -3,7 +3,10 @@ from .models import Hotel, Room, InventoryItem, Supplier, PurchaseOrder, OrderIt
 from .forms import HotelForm, RoomForm, InventoryItemForm, SupplierForm, PurchaseOrderForm, OrderItemForm
 from django.db.models import Sum, F, ExpressionWrapper, DecimalField
 from datetime import datetime, timedelta
+from decimal import Decimal
 # Hotel Views
+
+
 
 def hotel_list(request):
     hotels = Hotel.objects.all()
@@ -237,7 +240,7 @@ def inventory_calculation(request):
 
     # Calculate the inventory turnover ratio
     # For simplicity, assuming a fixed period and using a simple calculation
-    cost_of_goods_sold = 0.6 * total_inventory_value  # Example: COGS is 60% of total inventory value
+    cost_of_goods_sold = Decimal('0.6') * total_inventory_value # Example: COGS is 60% of total inventory value
 
     # Calculate average inventory value
     # Assume average inventory value is the total inventory value divided by 12 months

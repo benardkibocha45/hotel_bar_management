@@ -4,11 +4,11 @@
 
 {% block content %}
   <h1>Inventory Calculation</h1>
-  <p>Total Inventory Value: ${{ total_inventory_value }}</p>
+  <p>Total Inventory Value: ksh{{ total_inventory_value }}</p>
   <p>Inventory Value by Category:</p>
   <ul>
     {% for category in inventory_value_by_category %}
-      <li>{{ category.category }}: ${{ category.total_value }}</li>
+      <li>{{ category.category }}: ksh{{ category.total_value }}</li>
     {% endfor %}
   </ul>
   <p>Reorder Suggestions:</p>
