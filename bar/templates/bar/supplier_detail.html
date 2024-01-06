@@ -1,0 +1,17 @@
+<!-- supplier_detail.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Supplier Detail</h1>
+  <p><strong>Name:</strong> {{ supplier.name }}</p>
+  <p><strong>Contact Info:</strong> {{ supplier.contact_info }}</p>
+  <p><strong>Address:</strong> {{ supplier.address }}</p>
+  <p><strong>Email:</strong> {{ supplier.email }}</p>
+  <p><strong>Phone Number:</strong> {{ supplier.phone_number }}</p>
+  <p>
+    <a href="{% url 'supplier_update' supplier.pk %}">Edit</a>
+    <a href="{% url 'supplier_delete' supplier.pk %}">Delete</a>
+  </p>
+  <a href="{% url 'supplier_list' %}">Back to Supplier List</a>
+{% endblock %}

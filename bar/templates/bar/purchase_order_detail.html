@@ -1,0 +1,38 @@
+<!-- purchase_order_detail.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Purchase Order Details</h1>
+  <table>
+    <tr>
+      <th>Supplier</th>
+      <td>{{ purchase_order.supplier.name }}</td>
+    </tr>
+    <tr>
+      <th>Order Date</th>
+      <td>{{ purchase_order.order_date }}</td>
+    </tr>
+    <tr>
+      <th>Delivery Date</th>
+      <td>{{ purchase_order.delivery_date }}</td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <td>{{ purchase_order.status }}</td>
+    </tr>
+    <tr>
+      <th>Total Amount</th>
+      <td>{{ purchase_order.total_amount }}</td>
+    </tr>
+    <tr>
+      <th>Shipping Address</th>
+      <td>{{ purchase_order.shipping_address }}</td>
+    </tr>
+    <tr>
+      <th>Payment Status</th>
+      <td>{{ purchase_order.payment_status }}</td>
+    </tr>
+  </table>
+  <a href="{% url 'purchase_order_list' %}">Back to Purchase Orders</a>
+{% endblock %}

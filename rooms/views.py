@@ -12,3 +12,5 @@ def booking_list(request):
 def landing_page(request):
     # Add any logic or context data needed for the landing page
     return render(request, 'landing_page.html')
+
+

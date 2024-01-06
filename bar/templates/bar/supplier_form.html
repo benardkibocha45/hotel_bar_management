@@ -1,0 +1,13 @@
+<!-- supplier_form.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{% if form.instance.pk %}Edit Supplier{% else %}Create Supplier{% endif %}</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
+  </form>
+  <a href="{% url 'supplier_list' %}">Back to Supplier List</a>
+{% endblock %}

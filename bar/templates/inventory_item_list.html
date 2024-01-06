@@ -1,0 +1,42 @@
+<!-- inventory_item_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Inventory Items</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Quantity Available</th>
+        <th>Unit Price</th>
+        <th>Reorder Level</th>
+        <th>Expiry Date</th>
+        <th>Location</th>
+        <th>Supplier</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in inventory_items %}
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ item.quantity_available }}</td>
+        <td>{{ item.unit_price }}</td>
+        <td>{{ item.reorder_level }}</td>
+        <td>{{ item.expiry_date }}</td>
+        <td>{{ item.location }}</td>
+        <td>{{ item.supplier_info }}</td>
+        <td>
+          <a href="{% url 'inventory_item_detail' pk=item.pk %}">Detail</a>
+          <a href="{% url 'inventory_item_update' pk=item.pk %}">Update</a>
+          <a href="{% url 'inventory_item_delete' pk=item.pk %}">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'inventory_item_create' %}">Add New Item</a>
+{% endblock %}

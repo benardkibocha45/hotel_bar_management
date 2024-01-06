@@ -1,0 +1,7 @@
+<!-- sale_list.html -->
+<h1>Sale List</h1>
+<ul>
+    {% for sale in sales %}
+        <li>{{ sale.quantity_sold }} units of {{ sale.product.name }} on {{ sale.sale_date }}</li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hotel and Bar Management{% endblock %}</title>
+    <!-- Add your CSS links or inline styles here -->
+    <link rel="stylesheet" href="path/to/your/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="main-container text-black dark:text-white-dark min-h-screen" :class="[$store.app.navbar]">
+        {% include 'sidebar.html' %}
+    </div>
+    
+    <!-- Page Content -->
+    <div class="container">
+        {% block content %}
+        <!-- This block will be overridden by specific templates -->
+        {% endblock %}
+    </div>
+
+    <!-- Add your JavaScript scripts or links here -->
+    <script src="path/to/your/scripts.js"></script>
+</body>
+</html>

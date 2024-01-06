@@ -1,0 +1,15 @@
+<!-- hotel_detail.html -->
+
+{% extends 'base.html' %}
+{% block content %}
+  <h1>{{ hotel.name }}</h1>
+  <p><strong>Address:</strong> {{ hotel.address }}</p>
+  <p><strong>Contact Info:</strong> {{ hotel.contact_info }}</p>
+  <p><strong>Star Rating:</strong> {{ hotel.star_rating }}</p>
+  <p><strong>Amenities:</strong> {{ hotel.amenities }}</p>
+  <p><strong>Description:</strong> {{ hotel.description }}</p>
+  <p>
+    <a href="{% url 'hotel_update' pk=hotel.pk %}">Edit</a>
+    <a href="{% url 'hotel_delete' pk=hotel.pk %}">Delete</a>
+  </p>
+{% endblock %}

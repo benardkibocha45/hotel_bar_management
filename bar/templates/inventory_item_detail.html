@@ -1,0 +1,21 @@
+<!-- inventory_item_detail.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Inventory Item Detail</h1>
+  <p><strong>Name:</strong> {{ inventory_item.name }}</p>
+  <p><strong>Category:</strong> {{ inventory_item.category }}</p>
+  <p><strong>Quantity Available:</strong> {{ inventory_item.quantity_available }}</p>
+  <p><strong>Unit Price:</strong> {{ inventory_item.unit_price }}</p>
+  <p><strong>Reorder Level:</strong> {{ inventory_item.reorder_level }}</p>
+  <p><strong>Expiry Date:</strong> {{ inventory_item.expiry_date }}</p>
+  <p><strong>Location:</strong> {{ inventory_item.location }}</p>
+  <p><strong>Supplier:</strong> {{ inventory_item.supplier_info }}</p>
+  <p><a href="{% url 'inventory_item_update' pk=inventory_item.pk %}">Update</a></p>
+  <form action="{% url 'inventory_item_delete' pk=inventory_item.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+  </form>
+{% endblock %}
+

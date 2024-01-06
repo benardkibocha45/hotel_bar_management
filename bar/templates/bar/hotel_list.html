@@ -1,0 +1,37 @@
+<!-- hotel_list.html -->
+
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Hotels</h1>
+  <a href="{% url 'hotel_create' %}">Add Hotel</a>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Contact Info</th>
+        <th>Star Rating</th>
+        <th>Amenities</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for hotel in hotels %}
+        <tr>
+          <td>{{ hotel.name }}</td>
+          <td>{{ hotel.address }}</td>
+          <td>{{ hotel.contact_info }}</td>
+          <td>{{ hotel.star_rating }}</td>
+          <td>{{ hotel.amenities }}</td>
+          <td>{{ hotel.description }}</td>
+          <td>
+            <a href="{% url 'hotel_detail' pk=hotel.pk %}">View</a>
+            <a href="{% url 'hotel_update' pk=hotel.pk %}">Edit</a>
+            <a href="{% url 'hotel_delete' pk=hotel.pk %}">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

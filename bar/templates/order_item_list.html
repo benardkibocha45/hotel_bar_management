@@ -1,0 +1,36 @@
+<!-- order_item_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Order Item List</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Order</th>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order_item in order_items %}
+      <tr>
+        <td>{{ order_item.id }}</td>
+        <td>{{ order_item.order }}</td>
+        <td>{{ order_item.item }}</td>
+        <td>{{ order_item.quantity }}</td>
+        <td>{{ order_item.unit_price }}</td>
+        <td>
+          <a href="{% url 'order_item_detail' order_item.id %}">View</a>
+          <a href="{% url 'order_item_update' order_item.id %}">Edit</a>
+          <a href="{% url 'order_item_delete' order_item.id %}">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'order_item_create' %}">Add New Order Item</a>
+{% endblock %}

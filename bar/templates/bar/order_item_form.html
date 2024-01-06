@@ -1,0 +1,13 @@
+<!-- order_item_form.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{% if form.instance.pk %}Update Order Item{% else %}Create New Order Item{% endif %}</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if form.instance.pk %}Update{% else %}Create{% endif %} Order Item</button>
+  </form>
+  <a href="{% url 'order_item_list' %}">Cancel</a>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!-- room_list.html -->
+
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Room List</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Room Number</th>
+        <th>Type</th>
+        <th>Rate</th>
+        <th>Availability</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for room in rooms %}
+      <tr>
+        <td>{{ room.room_number }}</td>
+        <td>{{ room.room_type }}</td>
+        <td>{{ room.rate }}</td>
+        <td>{% if room.availability %}Available{% else %}Not Available{% endif %}</td>
+        <td>{{ room.description }}</td>
+        <td>
+          <a href="{% url 'room_detail' pk=room.pk %}">View</a>
+          <a href="{% url 'room_update' pk=room.pk %}">Edit</a>
+          <a href="{% url 'room_delete' pk=room.pk %}">Delete</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6">No rooms available</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'room_create' %}">Add Room</a>
+{% endblock %}

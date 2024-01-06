@@ -1,0 +1,30 @@
+<!-- order_item_detail.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Order Item Detail</h1>
+  <table>
+    <tr>
+      <th>ID:</th>
+      <td>{{ order_item.id }}</td>
+    </tr>
+    <tr>
+      <th>Order:</th>
+      <td>{{ order_item.order }}</td>
+    </tr>
+    <tr>
+      <th>Item:</th>
+      <td>{{ order_item.item }}</td>
+    </tr>
+    <tr>
+      <th>Quantity:</th>
+      <td>{{ order_item.quantity }}</td>
+    </tr>
+    <tr>
+      <th>Unit Price:</th>
+      <td>{{ order_item.unit_price }}</td>
+    </tr>
+  </table>
+  <a href="{% url 'order_item_list' %}">Back to Order Item List</a>
+{% endblock %}

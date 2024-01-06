@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bar',
     'rooms',
     'users',
+    'tailwind',
 ]
 
 MIDDLEWARE = [
