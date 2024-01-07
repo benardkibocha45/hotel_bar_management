@@ -28,13 +28,15 @@ def hotel_create(request):
 
 def hotel_update(request, pk):
     hotel = get_object_or_404(Hotel, pk=pk)
+    form = HotelForm(request.POST or None, instance=hotel)
+
     if request.method == 'POST':
-        form = HotelForm(request.POST, instance=hotel)
         if form.is_valid():
             hotel = form.save()
             return redirect('hotel_detail', pk=hotel.pk)
     else:
         form = HotelForm(instance=hotel)
+
     return render(request, 'hotel_form.html', {'form': form})
 
 def hotel_delete(request, pk):

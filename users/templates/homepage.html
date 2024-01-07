@@ -10,8 +10,7 @@
     <ul>
         <li><a href="{% url 'hotel_list' %}">List of Hotels</a></li>
         <li><a href="{% url 'hotel_create' %}">Create a Hotel</a></li>
-        <li><a href="{% url 'hotel_update' pk=hotel.pk %}">update a Hotel</a></li>
-        <li><a href="{% url 'hotel_delete' %}">delete a Hotel</a></li>
+      
         
     </ul>
 
@@ -19,8 +18,7 @@
     <ul>
         <li><a href="{% url 'room_list' %}">List of Rooms</a></li>
         <li><a href="{% url 'room_create' %}">Create a Room</a></li>
-        <li><a href="{% url 'room_update' %}">update a Room</a></li>
-        <li><a href="{% url 'room_delete' %}">delete a Room</a></li>
+       
         
     </ul>
 
@@ -28,31 +26,27 @@
     <ul>
         <li><a href="{% url 'purchase_order_list' %}">List of Purchase Orders</a></li>
         <li><a href="{% url 'purchase_order_create' %}">Create a Purchase Order</a></li>
-        <li><a href="{% url 'purchase_order_update' %}">Purchase update</a></li>
-        <li><a href="{% url 'purchase_order_delete' %}">Purchase delete</a></li>
+       
         <!-- Add other purchase order-related URLs here -->
     </ul>
     <h3>OrderItem URLs</h3>
     <ul>
         <li><a href="{% url 'order_item_list' %}">List of Order Items</a></li>
         <li><a href="{% url 'order_item_create' %}">Create an Order Item</a></li>
-        <li><a href="{% url 'order_item_update' %}">update an Order Item</a></li>
-        <li><a href="{% url 'order_item_delete' %}">delete an Order Item</a></li>
+       
         <!-- Add other order item-related URLs here -->
     </ul>
 <h3> InventoryItem</h3>
     <ul>
         <li><a href="{% url 'inventory_item_list' %}">List of inventory Items</a></li>
         <li><a href="{% url 'inventory_item_create' %}">create inventory Items</a></li>
-        <li><a href="{% url 'inventory_item_update' %}">update inventory Items</a></li>
-        <li><a href="{% url 'inventory_item_delete' %}">delete inventory Items</a></li>
         <li><a href="{% url 'inventory_calculation' %}">inventory_calculation</a></li>
     </ul>
     <h3>Supplier</h3>
     <ul>
         <li><a href="{% url 'supplier_list' %}">List of supplier</a></li>
         <li><a href="{% url 'supplier_create' %}">create supplier</a></li>
-        <li><a href="{% url 'supplier_update' %}">update supplier</a></li>
-        <li><a href="{% url 'supplier_delete' %}">delete supplier</a></li>
+        
+        
     </ul>
 {% endblock %}

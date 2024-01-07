@@ -6,7 +6,8 @@ urlpatterns = [
     path('hotels/', views.hotel_list, name='hotel_list'),
     path('hotels/<int:pk>/', views.hotel_detail, name='hotel_detail'),
     path('hotels/create/', views.hotel_create, name='hotel_create'),
-    path('hotels/<int:pk>/update/', views.hotel_update, name='hotel_update'),
+    path('bar/hotels/<int:pk>/update/', views.hotel_update, name='hotel_update'),
+
     path('hotels/<int:pk>/delete/', views.hotel_delete, name='hotel_delete'),
 
     # Room URLs
