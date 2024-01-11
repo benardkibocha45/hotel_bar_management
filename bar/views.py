@@ -3,6 +3,7 @@ from .models import Hotel, Room, InventoryItem, Supplier, PurchaseOrder, OrderIt
 from .forms import HotelForm, RoomForm, InventoryItemForm, SupplierForm, PurchaseOrderForm, OrderItemForm
 from django.db.models import Sum, F, ExpressionWrapper, DecimalField
 from datetime import datetime, timedelta
+from django.db.models import Sum
 from decimal import Decimal
 # Hotel Views
 
@@ -227,42 +228,40 @@ def order_item_delete(request, pk):
     return redirect('order_item_list')
 
 
+def calculate_total_inventory_value():
+    return sum(
+        item.quantity_available * item.unit_price
+        for item in InventoryItem.objects.all()
+    )
 
-def inventory_calculation(request):
-    # Calculate the total value of all inventory items
-    total_inventory_value = sum(item.quantity_available * item.unit_price for item in InventoryItem.objects.all())
-
-    # Calculate the total inventory value by category
-    inventory_value_by_category = InventoryItem.objects.values('category').annotate(
+def calculate_inventory_value_by_category():
+    return InventoryItem.objects.values('category').annotate(
         total_value=Sum(F('quantity_available') * F('unit_price'))
     )
 
-    # Calculate the reorder suggestions
-    reorder_suggestions = InventoryItem.objects.filter(quantity_available__lt=F('reorder_level'))
+def calculate_reorder_suggestions():
+    return InventoryItem.objects.filter(quantity_available__lt=F('reorder_level'))
 
-    # Calculate the inventory turnover ratio
-    # For simplicity, assuming a fixed period and using a simple calculation
-    cost_of_goods_sold = Decimal('0.6') * total_inventory_value # Example: COGS is 60% of total inventory value
+def calculate_inventory_turnover_ratio(total_inventory_value):
+    cost_of_goods_sold = Decimal('0.6') * total_inventory_value
+    average_inventory_value = total_inventory_value / 12 if total_inventory_value != 0 else 0
+    return cost_of_goods_sold / average_inventory_value if average_inventory_value != 0 else 0
 
-    # Calculate average inventory value
-    # Assume average inventory value is the total inventory value divided by 12 months
-    average_inventory_value = total_inventory_value / 12 if total_inventory_value != 0 else 0  # Example: Average inventory value over 12 months
-
-    # Calculate inventory turnover ratio
-    # Avoid division by zero by checking if average_inventory_value is not zero
-    inventory_turnover_ratio = cost_of_goods_sold / average_inventory_value if average_inventory_value != 0 else 0
-
-    # Calculate inventory ageing analysis
-    # For simplicity, assuming today's date as the reference date
+def calculate_inventory_ageing():
     today = datetime.now().date()
-    inventory_ageing = {
+    return {
         '1-30 days': InventoryItem.objects.filter(purchase_date__gte=today - timedelta(days=30)).count(),
         '31-60 days': InventoryItem.objects.filter(purchase_date__gte=today - timedelta(days=60),
                                                    purchase_date__lt=today - timedelta(days=30)).count(),
         # Add more age ranges as needed
     }
 
-    # Add other calculations as per your requirements
+def inventory_calculation(request):
+    total_inventory_value = calculate_total_inventory_value()
+    inventory_value_by_category = calculate_inventory_value_by_category()
+    reorder_suggestions = calculate_reorder_suggestions()
+    inventory_turnover_ratio = calculate_inventory_turnover_ratio(total_inventory_value)
+    inventory_ageing = calculate_inventory_ageing()
 
     return render(request, 'inventory_calculation.html', {
         'total_inventory_value': total_inventory_value,
@@ -271,3 +270,13 @@ def inventory_calculation(request):
         'inventory_turnover_ratio': inventory_turnover_ratio,
         'inventory_ageing': inventory_ageing,
     })
+
+def calculate_total_inventory_value():
+    return InventoryItem.objects.aggregate(
+        total_value=Sum('quantity_available' * 'unit_price')
+    )['total_value'] or 0
+
+def calculate_inventory_value_by_category():
+    return InventoryItem.objects.values('category').annotate(
+        total_value=Sum('quantity_available' * 'unit_price')
+    )

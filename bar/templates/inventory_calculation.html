@@ -3,21 +3,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts"/>
   <h1>Inventory Calculation</h1>
+  <div id="totalInventoryChart">
   <p>Total Inventory Value: ksh{{ total_inventory_value }}</p>
+</div>
+<div id="inventoryByCategoryChart">
   <p>Inventory Value by Category:</p>
   <ul>
     {% for category in inventory_value_by_category %}
       <li>{{ category.category }}: ksh{{ category.total_value }}</li>
     {% endfor %}
   </ul>
+</div>
   <p>Reorder Suggestions:</p>
   <ul>
     {% for item in reorder_suggestions %}
       <li>{{ item.name }}</li>
     {% endfor %}
   </ul>
+  <div id="inventoryTurnoverChart">
   <p>Inventory Turnover Ratio: {{ inventory_turnover_ratio }}</p>
+</div>
   <p>Inventory Ageing Analysis:</p>
   <ul>
     {% for range, count in inventory_ageing.items %}
@@ -26,7 +33,79 @@
   </ul>
   
   <canvas id="inventoryValueByCategoryChart"></canvas>
+  <script>
+    
+<!-- Add more containers for other charts as needed -->
+document.addEventListener("DOMContentLoaded", function () {
+    // Total Inventory Value Chart
+    var totalInventoryChart = new ApexCharts(document.querySelector("#totalInventoryChart"), {
+      chart: {
+                            type: 'area',
+                            height: 300,
+                            zoom: {
+                                enabled: false
+                            },
+                            toolbar: {
+                                show: false
+                            }
+                        },
+                        colors: ['#805dca'],
+                        dataLabels: {
+                            enabled: false
+                        },
+                        stroke: {
+                            width: 2,
+                            curve: 'smooth'
+                        },
+      
+        xaxis: {
+                            axisBorder: {
+                                color: isDark ? '#191e3a' : '#e0e6ed'
+                            },
+                          },
+
+        yaxis: {
+
+                            opposite: isRtl ? true : false,
+                            labels: {
+                                offsetX: isRtl ? -40 : 0,
+                            }
+                        },
+      });
+      totalInventoryChart.render();
+    
+
+    
+
+    // Inventory Value by Category Chart
+    var inventoryByCategoryChart = new ApexCharts(document.querySelector("#inventoryByCategoryChart"), {
+        chart: {
+            type: "pie",
+            height: 350,
+        },
+        series: ["{{ inventory_value_by_category | safe }}"], // Check if this data is correctly passed from the server
+        labels: ["{{ inventory_value_by_category | safe }}"], // Check if this data is correctly passed from the server
+    });
+    inventoryByCategoryChart.render();
+
+    // Inventory Turnover Ratio Chart
+    var inventoryTurnoverChart = new ApexCharts(document.querySelector("#inventoryTurnoverChart"), {
+        chart: {
+            type: "radialBar",
+            height: 350,
+        },
+        series: ["{{ inventory_turnover_ratio }}"], // Check if this value is correctly passed from the server
+        labels: ["Inventory Turnover Ratio"],
+    });
+    inventoryTurnoverChart.render();
+
+    // Add more chart initializations for other metrics if needed
+    
+});
+
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
  
 {% endblock %}
