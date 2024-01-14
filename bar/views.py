@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Hotel, Room, InventoryItem, Supplier, PurchaseOrder, OrderItem
+from .models import Hotel, Room, InventoryItem, Supplier, PurchaseOrder, OrderItem, Activity
 from .forms import HotelForm, RoomForm, InventoryItemForm, SupplierForm, PurchaseOrderForm, OrderItemForm
 from django.db.models import Sum, F, ExpressionWrapper, DecimalField
 from datetime import datetime, timedelta
 from django.db.models import Sum
 from decimal import Decimal
+
 # Hotel Views
 
 
@@ -45,7 +46,7 @@ def hotel_delete(request, pk):
     hotel.delete()
     return redirect('hotel_list')
 
-# Room Views (similar CRUD views for other models)
+
 
 # Room Views
 def room_list(request):
@@ -227,6 +228,10 @@ def order_item_delete(request, pk):
     order_item.delete()
     return redirect('order_item_list')
 
+def recent_activities(request):
+    activities = Activity.objects.order_by('-timestamp')[:10]  # Get the 10 most recent activities
+    return render(request, 'recent_activities.html', {'activities': activities})
+
 
 def calculate_total_inventory_value():
     return sum(
@@ -245,7 +250,13 @@ def calculate_reorder_suggestions():
 def calculate_inventory_turnover_ratio(total_inventory_value):
     cost_of_goods_sold = Decimal('0.6') * total_inventory_value
     average_inventory_value = total_inventory_value / 12 if total_inventory_value != 0 else 0
-    return cost_of_goods_sold / average_inventory_value if average_inventory_value != 0 else 0
+    
+    if average_inventory_value != 0:
+        inventory_turnover_ratio = cost_of_goods_sold / average_inventory_value
+    else:
+        inventory_turnover_ratio = 0
+    
+    return inventory_turnover_ratio
 
 def calculate_inventory_ageing():
     today = datetime.now().date()
@@ -255,28 +266,38 @@ def calculate_inventory_ageing():
                                                    purchase_date__lt=today - timedelta(days=30)).count(),
         # Add more age ranges as needed
     }
-
 def inventory_calculation(request):
-    total_inventory_value = calculate_total_inventory_value()
-    inventory_value_by_category = calculate_inventory_value_by_category()
-    reorder_suggestions = calculate_reorder_suggestions()
-    inventory_turnover_ratio = calculate_inventory_turnover_ratio(total_inventory_value)
-    inventory_ageing = calculate_inventory_ageing()
+    try:
+        # Perform calculations that might raise exceptions
+        total_inventory_value = calculate_total_inventory_value()
+        inventory_value_by_category = calculate_inventory_value_by_category()
+        reorder_suggestions = calculate_reorder_suggestions()
+        total_inventory_value = calculate_total_inventory_value()
 
-    return render(request, 'inventory_calculation.html', {
+        # Handle division by zero error
+        inventory_turnover_ratio = calculate_inventory_turnover_ratio(total_inventory_value)
+        inventory_ageing = calculate_inventory_ageing()
+
+        context = {
         'total_inventory_value': total_inventory_value,
         'inventory_value_by_category': inventory_value_by_category,
         'reorder_suggestions': reorder_suggestions,
         'inventory_turnover_ratio': inventory_turnover_ratio,
         'inventory_ageing': inventory_ageing,
-    })
+    }
 
+        return render(request, 'inventory_calculation.html', context)
+    except Exception as e:
+        # Handle any unexpected errors gracefully
+        error_message = f"An error occurred: {e}"
+        return render(request, 'error.html', {'error_message': error_message})
+    
 def calculate_total_inventory_value():
     return InventoryItem.objects.aggregate(
-        total_value=Sum('quantity_available' * 'unit_price')
+        total_value=Sum(F('quantity_available') * F('unit_price'))
     )['total_value'] or 0
 
 def calculate_inventory_value_by_category():
     return InventoryItem.objects.values('category').annotate(
-        total_value=Sum('quantity_available' * 'unit_price')
+        total_value=Sum(F('quantity_available') * F('unit_price'))
     )

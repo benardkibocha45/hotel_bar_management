@@ -1,8 +1,25 @@
 <!-- In dashboard.html -->
 
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts"/>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<script src="{% static 'js/script.js' %}"></script>
+
+<link href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+ <!-- Vendor CSS Files -->
+<link href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+<link href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+<link href="{% static 'boxicons/css/boxicons.min.css' %}">
+<link href="{% static 'quill/quill.snow.css' %}">
+<link href="{% static 'quill/quill.bubble.css' %}">
+<link href="{% static 'remixicon/remixicon.css' %}">
+<link href="{% static 'simple-datatables/style.css' %}">
+
+<div>
     <h1>User Dashboard</h1>
 
     <!-- Graph showing 12 months revenue -->
@@ -119,6 +136,7 @@
     <div id="totalInventoryChart"></div>
 <div id="inventoryByCategoryChart"></div>
 <div id="inventoryTurnoverChart"></div>
+</div>
 <script>
 <!-- Add more containers for other charts as needed -->
 document.addEventListener("DOMContentLoaded", function () {
@@ -163,5 +181,15 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add more chart initializations for other metrics if needed
 });
 </script>
+   <script src="{% static 'js/script.js' %}"></script>
+
+<script src="{% static 'apexcharts/apexcharts.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'chart.js/chart.umd.js' %}"></script>
+<script src="{% static 'echarts/echarts.min.js' %}"></script>
+<script src="{% static 'quill/quill.min.js' %}"></script>
+<script src="{% static 'simple-datatables/simple-datatables.js' %}"></script>
+<script src="{% static 'tinymce/tinymce.min.js' %}"></script>
+<script src="{% static 'php-email-form/validate.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 {% endblock %}

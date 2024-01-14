@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recent Activities</title>
+</head>
+<body>
+    <h1>Recent Activities</h1>
+    {% for activity in activities %}
+    <li>{{ activity.description }} - {{ activity.timestamp }}</li>
+    <!-- Add additional debugging output as needed -->
+{% endfor %}
+</body>
+</html>

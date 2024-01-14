@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from .views import recent_activities
+
 
 urlpatterns = [
 # Hotel URLs
@@ -44,6 +46,8 @@ urlpatterns = [
     path('suppliers/<int:pk>/', views.supplier_detail, name='supplier_detail'),
     path('suppliers/<int:pk>/update/', views.supplier_update, name='supplier_update'),
     path('suppliers/<int:pk>/delete/', views.supplier_delete, name='supplier_delete'),
+
+     path('recent-activities/', recent_activities, name='recent_activities'),
 
 ]
 
