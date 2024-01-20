@@ -1,16 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purchase Order Form</title>
-</head>
-<body>
-    <h1>Purchase Order Form</h1>
-    <form method="post">
+<!-- room_form.html -->
+{% extends 'base.html' %}
+{% block content %}
+<main id="main" class="main">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{% if form.instance.pk %}Update Supplier{% else %}Create Supplier{% endif %}</h5>
+
+      <!-- Your form -->
+      <form method="post" enctype="multipart/form-data" class="row g-3">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
-</body>
-</html>
+        <div class="col-md-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Supplier</span>
+            {{ form.supplier }}
+          </div>
+        </div>
+      <div class="col-md-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Order Date</span>
+            {{ form.order_date }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Delivery Date</span>
+            {{ form.delivery_date }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Status</span>
+            {{ form.status }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Total Amount</span>
+            {{ form.total_amount }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Shipping Address</span>
+            {{ form.shipping_address }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Payment Status</span>
+            {{ form.payment_status }}
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
+        </div>
+      </form><!-- End your form -->
+
+    </div>
+  </div>
+</main>
+{% endblock %}

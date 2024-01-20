@@ -1,12 +1,68 @@
-<!-- inventory_item_form.html -->
-
+<!-- room_form.html -->
 {% extends 'base.html' %}
-
 {% block content %}
-  <h1>{% if form.instance.pk %}Update Inventory Item{% else %}Create Inventory Item{% endif %}</h1>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-  </form>
+<main id="main" class="main">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{% if form.instance.pk %}Update{% else %}Create{% endif %}</h5>
+
+      <!-- Your form -->
+      <form method="post" enctype="multipart/form-data" class="row g-3">
+        {% csrf_token %}
+        <div class="col-md-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+            {{ form.name }}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Category</span>
+            {{ form.category }}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Quantity Available</span>
+            {{ form.quantity_available }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Unit Price</span>
+            {{ form.unit_price }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Reorder Level</span>
+            {{ form.reorder_level }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Expiry Date</span>
+            {{ form.expiry_date }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Location</span>
+            {{ form.location }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">supplier_info</span>
+            {{ form.supplier_info }}
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
+        </div>
+      </form><!-- End your form -->
+
+    </div>
+  </div>
+</main>
 {% endblock %}

@@ -1,7 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -76,140 +76,7 @@
 
   </header><!-- End Header -->
 
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
 
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
-        <a class="nav-link " href="{% url 'dashboard' %}">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Hotel</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{% url 'hotel_list' %}">
-              <i class="bi bi-circle"></i><span>List of Hotels</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'hotel_create' %}">
-              <i class="bi bi-circle"></i><span>Create a Hotel</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Components Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Rooms</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{% url 'room_list' %}">
-              <i class="bi bi-circle"></i><span>Rooms' List</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'room_create' %}">
-              <i class="bi bi-circle"></i><span>Create a Room</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End rooms Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Purchases</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{% url 'purchase_order_list' %}">
-              <i class="bi bi-circle"></i><span>List of Purchase Orders</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'purchase_order_create' %}">
-              <i class="bi bi-circle"></i><span>Create a Purchase Order</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Tables Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-bar-chart"></i><span>Inventory</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{% url 'inventory_item_list' %}">
-              <i class="bi bi-circle"></i><span>List of inventory Items</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'inventory_item_create' %}">
-              <i class="bi bi-circle"></i><span>create inventory Items</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'inventory_calculation' %}">
-              <i class="bi bi-circle"></i><span>inventory_calculation</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gem"></i><span>OrderItem</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{% url 'order_item_list' %}">
-              <i class="bi bi-circle"></i><span>List of Order Items</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'order_item_create' %}">
-              <i class="bi bi-circle"></i><span>Create an Order Item</span>
-            </a>
-          </li>
-          <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Boxicons</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Icons Nav -->
-
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-bar-chart"></i><span>Supplier</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{% url 'supplier_list' %}">
-              <i class="bi bi-circle"></i><span>List of supplier</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'supplier_create' %}">
-              <i class="bi bi-circle"></i><span>create supplier</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Nav -->
-
-    </ul>
-
-  </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
 
@@ -895,6 +762,4 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="{% static 'js/script.js' %}"></script>
-</body>
-
-</html>
+  {% endblock %}

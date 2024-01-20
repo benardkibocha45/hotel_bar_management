@@ -1,11 +1,55 @@
-<!-- hotel_form.html -->
-
 {% extends 'base.html' %}
 {% block content %}
-  <h1>{% if form.instance.pk %}Update{% else %}Create{% endif %} Hotel</h1>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% if form.instance.pk %}Update{% else %}Create{% endif %} Hotel</button>
-  </form>
+<main id="main" class="main">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{% if form.instance.pk %}Update{% else %}Create{% endif %} Hotel</h5>
+
+      <!-- Your form -->
+      <form method="post" enctype="multipart/form-data" class="row g-3">
+        {% csrf_token %}
+        <div class="col-md-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+            {{ form.name }}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
+            {{ form.address }}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Contact Info</span>
+            {{ form.contact_info }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Star Rating</span>
+            {{ form.star_rating }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Amenities</span>
+            {{ form.amenities }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+            {{ form.description }}
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">{% if form.instance.pk %}Update{% else %}Create{% endif %} Hotel</button>
+        </div>
+      </form><!-- End your form -->
+
+    </div>
+  </div>
+</main>
 {% endblock %}

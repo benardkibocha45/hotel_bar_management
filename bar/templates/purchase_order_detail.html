@@ -3,6 +3,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<main id="main" class="main">
   <h1>Purchase Order Details</h1>
   <table>
     <tr>
@@ -35,4 +36,5 @@
     </tr>
   </table>
   <a href="{% url 'purchase_order_list' %}">Back to Purchase Orders</a>
+</main>
 {% endblock %}

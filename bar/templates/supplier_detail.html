@@ -3,6 +3,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<main id="main" class="main">
   <h1>Supplier Detail</h1>
   <p><strong>Name:</strong> {{ supplier.name }}</p>
   <p><strong>Contact Info:</strong> {{ supplier.contact_info }}</p>
@@ -14,4 +15,5 @@
     <a href="{% url 'supplier_delete' supplier.pk %}">Delete</a>
   </p>
   <a href="{% url 'supplier_list' %}">Back to Supplier List</a>
+</main>
 {% endblock %}

@@ -1,7 +1,11 @@
 <!-- hotel_detail.html -->
 
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
+<main id="main" class="main">
+
+
   <h1>{{ hotel.name }}</h1>
   <p><strong>Address:</strong> {{ hotel.address }}</p>
   <p><strong>Contact Info:</strong> {{ hotel.contact_info }}</p>
@@ -11,5 +15,12 @@
   <p>
     <a href="{% url 'hotel_update' pk=hotel.pk %}">Edit</a>
     <a href="{% url 'hotel_delete' pk=hotel.pk %}">Delete</a>
+
   </p>
+
+
+
+
+</main>
+
 {% endblock %}

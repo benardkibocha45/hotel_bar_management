@@ -1,13 +1,47 @@
 <!-- order_item_form.html -->
 
+<!-- room_form.html -->
 {% extends 'base.html' %}
-
 {% block content %}
-  <h1>{% if form.instance.pk %}Update Order Item{% else %}Create New Order Item{% endif %}</h1>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% if form.instance.pk %}Update{% else %}Create{% endif %} Order Item</button>
-  </form>
-  <a href="{% url 'order_item_list' %}">Cancel</a>
+<main id="main" class="main">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{% if form.instance.pk %}Update{% else %}Create{% endif %}</h5>
+
+      <!-- Your form -->
+      <form method="post" enctype="multipart/form-data" class="row g-3">
+        {% csrf_token %}
+        <div class="col-md-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Order</span>
+            {{ form.order }}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">item</span>
+            {{ form.item }}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Quantity</span>
+            {{ form.quantity }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Unit Price</span>
+            {{ form.unit_price }}
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
+        </div>
+      </form><!-- End your form -->
+      <a href="{% url 'order_item_list' %}">Cancel</a>
+    </div>
+  </div>
+  
+</main>
 {% endblock %}

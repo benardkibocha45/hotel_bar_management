@@ -1,13 +1,51 @@
-<!-- supplier_form.html -->
-
+<!-- room_form.html -->
 {% extends 'base.html' %}
-
 {% block content %}
-  <h1>{% if form.instance.pk %}Edit Supplier{% else %}Create Supplier{% endif %}</h1>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
-  </form>
-  <a href="{% url 'supplier_list' %}">Back to Supplier List</a>
+<main id="main" class="main">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{% if form.instance.pk %}Update{% else %}Create{% endif %}</h5>
+
+      <!-- Your form -->
+      <form method="post" enctype="multipart/form-data" class="row g-3">
+        {% csrf_token %}
+        <div class="col-md-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+            {{ form.name }}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Contact</span>
+            {{ form.contact_info }}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
+            {{ form.address }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+            {{ form.email }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Phone Number</span>
+            {{ form.phone_number }}
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
+        </div>
+      </form><!-- End your form -->
+
+    </div>
+  </div>
+</main>
 {% endblock %}

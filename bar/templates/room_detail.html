@@ -2,6 +2,7 @@
 
 {% extends 'base.html' %}
 {% block content %}
+<main id="main" class="main">
   <h1>Room Detail</h1>
   <table>
     <tr>
@@ -27,4 +28,5 @@
   </table>
   <a href="{% url 'room_update' pk=room.pk %}">Edit</a>
   <a href="{% url 'room_delete' pk=room.pk %}">Delete</a>
+</main>
 {% endblock %}

@@ -1,39 +1,76 @@
-<!-- room_list.html -->
 
-{% extends 'base.html' %}
-{% block content %}
-  <h1>Room List</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Room Number</th>
-        <th>Type</th>
-        <th>Rate</th>
-        <th>Availability</th>
-        <th>Description</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for room in rooms %}
-      <tr>
-        <td>{{ room.room_number }}</td>
-        <td>{{ room.room_type }}</td>
-        <td>{{ room.rate }}</td>
-        <td>{% if room.availability %}Available{% else %}Not Available{% endif %}</td>
-        <td>{{ room.description }}</td>
-        <td>
-          <a href="{% url 'room_detail' pk=room.pk %}">View</a>
-          <a href="{% url 'room_update' pk=room.pk %}">Edit</a>
-          <a href="{% url 'room_delete' pk=room.pk %}">Delete</a>
-        </td>
-      </tr>
-      {% empty %}
-      <tr>
-        <td colspan="6">No rooms available</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <a href="{% url 'room_create' %}">Add Room</a>
-{% endblock %}
+<main id="main" class="main">
+  {% extends 'base.html' %}
+  {% load static %}
+  {% block title %}Romm List{% endblock title %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="{% static 'js/script.js' %}"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  
+   <!-- Vendor CSS Files -->
+  <link href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+  <link href="{% static 'boxicons/css/boxicons.min.css' %}">
+  <link href="{% static 'quill/quill.snow.css' %}">
+  <link href="{% static 'quill/quill.bubble.css' %}">
+  <link href="{% static 'remixicon/remixicon.css' %}">
+  <link href="{% static 'simple-datatables/style.css' %}">
+  
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts"/>
+  
+  {% block content %}
+    <div class="table-responsive">
+      <table id="studenttable" class="table table-bordered table-hover" data-page-length='100'>
+        <thead class="thead-light">
+          <tr>
+           
+            <th>Room Number</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for room in rooms %}
+          <tr>
+            <td>{{ room.room_number }}</td>
+            <td>
+              <a href="{% url 'room_detail' pk=room.pk %}">View</a>
+              <a href="{% url 'room_update' pk=room.pk %}">Edit</a>
+              <a href="{% url 'room_delete' pk=room.pk %}">Delete</a>
+          </tr> {% empty %}
+          <tr>
+            <td colspan="6">No rooms available</td>
+          </tr>
+                {% endfor %}
+  
+        </tbody>
+      </table>
+
+    </div>
+    <a class="btn btn-primary" <a href="{% url 'room_create' %}"><i
+      class="fas fa-upload"></i>Add New Room </a>
+  {% endblock content %}
+  
+  
+  {% block morejs %}
+  <script>
+    $('#roomtable').DataTable({
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+  
+  <script src="{% static 'apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'quill/quill.min.js' %}"></script>
+  <script src="{% static 'simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'php-email-form/validate.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  {% endblock morejs %}
+  </main>
+

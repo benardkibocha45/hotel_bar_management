@@ -1,42 +1,76 @@
-<!-- inventory_item_list.html -->
 
-{% extends 'base.html' %}
 
-{% block content %}
-  <h1>Inventory Items</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Quantity Available</th>
-        <th>Unit Price</th>
-        <th>Reorder Level</th>
-        <th>Expiry Date</th>
-        <th>Location</th>
-        <th>Supplier</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for item in inventory_items %}
-      <tr>
-        <td>{{ item.name }}</td>
-        <td>{{ item.category }}</td>
-        <td>{{ item.quantity_available }}</td>
-        <td>{{ item.unit_price }}</td>
-        <td>{{ item.reorder_level }}</td>
-        <td>{{ item.expiry_date }}</td>
-        <td>{{ item.location }}</td>
-        <td>{{ item.supplier_info }}</td>
-        <td>
-          <a href="{% url 'inventory_item_detail' pk=item.pk %}">Detail</a>
-          <a href="{% url 'inventory_item_update' pk=item.pk %}">Update</a>
-          <a href="{% url 'inventory_item_delete' pk=item.pk %}">Delete</a>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <a href="{% url 'inventory_item_create' %}">Add New Item</a>
-{% endblock %}
+<main id="main" class="main">
+  {% extends 'base.html' %}
+  {% load static %}
+  {% block title %}Inventory Items{% endblock title %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="{% static 'js/script.js' %}"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  
+   <!-- Vendor CSS Files -->
+  <link href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+  <link href="{% static 'boxicons/css/boxicons.min.css' %}">
+  <link href="{% static 'quill/quill.snow.css' %}">
+  <link href="{% static 'quill/quill.bubble.css' %}">
+  <link href="{% static 'remixicon/remixicon.css' %}">
+  <link href="{% static 'simple-datatables/style.css' %}">
+  
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts"/>
+  
+  {% block content %}
+    <div class="table-responsive">
+      <table id="studenttable" class="table table-bordered table-hover" data-page-length='100'>
+        <thead class="thead-light">
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in inventory_items %}
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td>
+              <a href="{% url 'inventory_item_detail' pk=item.pk %}">Detail</a>
+              <a href="{% url 'inventory_item_update' pk=item.pk %}">Update</a>
+              <a href="{% url 'inventory_item_delete' pk=item.pk %}">Delete</a>
+            </td>
+          </tr>
+                {% endfor %}
+  
+        </tbody>
+      </table>
+
+    </div>
+    <a class="btn btn-primary" <a href="{% url 'inventory_item_create' %}"><i
+      class="fas fa-upload"></i>Add New Item</a>
+  {% endblock content %}
+  
+  
+  {% block morejs %}
+  <script>
+    $('#inventoryitemtable').DataTable({
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+  
+  <script src="{% static 'apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'quill/quill.min.js' %}"></script>
+  <script src="{% static 'simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'php-email-form/validate.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  {% endblock morejs %}
+  </main>
+
